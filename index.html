@@ -1,854 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Herbert Lawson - Software Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --bg-light: #f9fafb;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Section */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-30px, -30px) rotate(180deg); }
-        }
-
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 5px solid var(--white);
-            margin-bottom: 20px;
-            object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .name {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .contact-item a {
-            color: var(--white);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            opacity: 0.8;
-        }
-
-        /* Navigation */
-        nav {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--primary-color);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        /* Education Section */
-        .education-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 20px;
-        }
-
-        .school-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .education-date {
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .degree {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .achievements {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .achievement-tag {
-            background: var(--secondary-color);
-            color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Experience Section */
-        .experience-grid {
-            display: grid;
-            gap: 40px;
-        }
-
-        .experience-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .experience-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .company-info h3 {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .position {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .location {
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .experience-date {
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .achievements-list {
-            margin-top: 20px;
-        }
-
-        .achievements-list li {
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-        }
-
-        .achievements-list li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-header {
-            padding: 30px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        .project-tech {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tech-tag {
-            background: rgba(255,255,255,0.2);
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        .project-body {
-            padding: 30px;
-        }
-
-        .project-award {
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .skill-category {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .skill-category h3 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: var(--bg-light);
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--secondary-color);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        /* Leadership Section */
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .leadership-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .leadership-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .leadership-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-
-        .leadership-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 2rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 20px;
-                justify-content: center;
-            }
-
-            .education-header,
-            .experience-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-        }
-
-        /* Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Herbert Lawson – Software & AI Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  Icons  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+  :root{
+    --bg:#0d1117;
+    --surface:#161b22;
+    --glass:#ffffff0d;
+    --border:#30363d;
+    --primary:#58a6ff;
+    --accent:#f778ba;
+    --text:#c9d1d9;
+    --text2:#8b949e;
+    --grad:linear-gradient(135deg,var(--primary),var(--accent));
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif;}
+  body{background:var(--bg);color:var(--text);line-height:1.6;}
+  section{padding:90px 0;}
+  .container{max-width:1100px;margin:auto;padding:0 20px;}
+  /* ---------- header ---------- */
+  header{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    background:var(--grad);
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="a"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23a)" opacity=".1"/></svg>');
+    animation:noise 8s steps(10) infinite;
+  }
+  @keyframes noise{to{background-position:500% 500%;}}
+  .headshot{
+    width:160px;height:160px;border-radius:50%;border:4px solid var(--white);
+    margin-bottom:20px;object-fit:cover;z-index:2;position:relative;
+  }
+  .name{font-size:3rem;font-weight:700;letter-spacing:1px;z-index:2;position:relative;}
+  .title{height:40px;font-size:1.4rem;font-weight:500;z-index:2;position:relative;color:#fff;}
+  .contact-bar{
+    display:flex;gap:25px;justify-content:center;margin-top:15px;flex-wrap:wrap;z-index:2;position:relative;
+  }
+  .contact-bar a{color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;transition:.3s;}
+  .contact-bar a:hover{transform:translateY(-3px);}
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;background:#00000080;backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);z-index:100;
+  }
+  .nav{
+    display:flex;gap:30px;justify-content:center;padding:18px 0;list-style:none;
+  }
+  .nav a{color:var(--text);text-decoration:none;font-weight:600;transition:.3s;}
+  .nav a:hover{color:var(--primary);}
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--glass);border:1px solid var(--border);border-radius:16px;
+    padding:30px;margin-bottom:30px;backdrop-filter:blur(10px);
+    transition:transform .3s,box-shadow .3s;
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:0 0 25px #58a6ff40;}
+  .chip{
+    display:inline-block;background:var(--primary);color:#fff;font-size:.75rem;
+    padding:4px 12px;border-radius:999px;margin:4px 4px 4px 0;font-weight:600;
+  }
+  .section-title{font-size:2.2rem;margin-bottom:40px;text-align:center;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  /* ---------- grids ---------- */
+  .grid3{display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  /* ---------- footer ---------- */
+  footer{text-align:center;padding:40px 0;font-size:.9rem;color:var(--text2);}
+  /* ---------- media ---------- */
+  @media(max-width:700px){
+    .name{font-size:2.2rem;}
+    .nav{gap:18px;font-size:.9rem;}
+  }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container">
-            <img src="https://via.placeholder.com/200" alt="Herbert Lawson" class="profile-img">
-            <h1 class="name">Herbert Lawson</h1>
-            <p class="title">Software Engineer | AI Researcher | Space Force Cadet</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <a href="tel:(210)850-7261">(210) 850-7261</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:hrlawson@miners.utep.edu">hrlawson@miners.utep.edu</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <a href="https://linkedin.com/in/herbertlawson" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i>
-                    <a href="https://github.com/juniorlaw" target="_blank">GitHub</a>
-                </div>
-            </div>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <img src="https://i.pravatar.cc/160?u=herbertlawson" alt="HL" class="headshot">
+  <h1 class="name">Herbert Lawson</h1>
+  <div class="title" id="typeText"></div>
+  <div class="contact-bar">
+    <a href="tel:+12108507261"><i class="fa-solid fa-phone"></i> (210) 850‑7261</a>
+    <a href="mailto:hrlawson@miners.utep.edu"><i class="fa-solid fa-envelope"></i> Email</a>
+    <a href="https://linkedin.com/in/herbertlawson" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    <a href="https://github.com/juniorlaw" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+  </div>
+</header>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <ul class="nav">
+    <li><a href="#edu">Education</a></li>
+    <li><a href="#exp">Experience</a></li>
+    <li><a href="#proj">Projects</a></li>
+    <li><a href="#skill">Skills</a></li>
+    <li><a href="#lead">Leadership</a></li>
+  </ul>
+</nav>
+
+<!-- ================= EDUCATION ================= -->
+<section id="edu">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <div class="card">
+      <h3>The University of Texas at El Paso</h3>
+      <p><strong>B.S. Computer Science</strong> — Expected May 2027</p>
+      <p><strong>GPA:</strong> 4.0/4.0</p>
+      <div class="tags">
+        <span class="chip">Dean's List 2023-25</span>
+        <span class="chip">Honors Student</span>
+        <span class="chip">Google Tech Exchange Alumnus</span>
+      </div>
+      <p style="margin-top:12px">Relevant Coursework: Computer Organisation, Advanced OOP, Software Engineering, AI/ML, Databases</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="exp">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <h3>NVIDIA</h3>
+          <p>Software Engineer Intern | San José, CA</p>
         </div>
-    </header>
+        <span class="chip">Jun 2025 – Aug 2025</span>
+      </div>
+      <ul style="margin-top:15px;padding-left:20px">
+        <li>Built <strong>Nexbase</strong> – production dashboard indexing 100+ services; live SLO metrics from Datadog, PagerDuty, Fusion. Reduced MTTR 50%.</li>
+        <li>Designed dynamic MCP + NVIDIA NeMo search to surface contextual runbooks and owners for 15+ SREs.</li>
+        <li>Stack: Python, FastAPI, React, MySQL, Redis, Docker, K8s – hosted on Fusion (still active).</li>
+      </ul>
+    </div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#leadership">Leadership</a></li>
-                </ul>
-            </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <h3>Google</h3>
+          <p>Tech Exchange Scholar (select 125 students nationally)</p>
         </div>
-    </nav>
+        <span class="chip">Jan 2024 – May 2024</span>
+      </div>
+      <ul style="margin-top:15px;padding-left:20px">
+        <li>Semester-long immersion at Google HQ studying distributed systems & cloud engineering with Google mentors.</li>
+      </ul>
+    </div>
 
-    <!-- Education Section -->
-    <section id="education" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-card">
-                <div class="education-header">
-                    <div>
-                        <h3 class="school-name">The University of Texas at El Paso</h3>
-                        <p class="degree">Bachelor of Science in Computer Science</p>
-                        <p class="expected">Expected: May 2027</p>
-                    </div>
-                    <span class="education-date">2023 - 2027</span>
-                </div>
-                <div class="achievements">
-                    <span class="achievement-tag">Dean's List 2023-2025</span>
-                    <span class="achievement-tag">Honors Student</span>
-                </div>
-                <p style="margin-top: 20px;"><strong>Relevant Coursework:</strong> Computer Organization, Advanced Object-Oriented Programming, Intro to Software Engineering</p>
-            </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <h3>UTEP</h3>
+          <p>Intro CS Instructor Assistant | El Paso, TX</p>
         </div>
-    </section>
+        <span class="chip">Jan 2025 – May 2025</span>
+      </div>
+      <ul style="margin-top:15px;padding-left:20px">
+        <li>Taught Python & Java to 250 freshmen; led 40-student weekly lab.</li>
+      </ul>
+    </div>
 
-    <!-- Experience Section -->
-    <section id="experience" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="company-info">
-                            <h3>NVIDIA</h3>
-                            <p class="position">Software Engineer Intern</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> San Jose, California</p>
-                        </div>
-                        <span class="experience-date">June 2025 - August 2025</span>
-                    </div>
-                    <ul class="achievements-list">
-                        <li>Architected an AI-powered IT Service Catalog using Model Context Protocol to route user queries and retrieve live operational data from 100+ NVIDIA services, improving incident response and reducing MTTR by over 50%.</li>
-                        <li>Constructed a modular service metadata system with fallback logic, automated classification, and a RACI-aligned ownership governance framework, eliminating spreadsheet-based tracking across a 15+ engineer SRE team.</li>
-                        <li>Facilitated brown bag sessions and 1:1 meetings with service owners to ensure catalog usability and alignment with customer needs, reducing service onboarding time by ~3 minutes across all NVIDIA.</li>
-                    </ul>
-                </div>
-
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="company-info">
-                            <h3>The University of Texas at El Paso</h3>
-                            <p class="position">Introduction to Computer Science Instructor's Assistant</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> El Paso, Texas</p>
-                        </div>
-                        <span class="experience-date">January 2025 - May 2025</span>
-                    </div>
-                    <ul class="achievements-list">
-                        <li>Teaching programming logic and best practices to 250 students in an introductory computer science course.</li>
-                        <li>Hosting weekly office hours to provide individualized support on coding, debugging, and algorithmic concepts.</li>
-                        <li>Leading a weekly 40-student lab, guiding students through foundational Java and computer science.</li>
-                    </ul>
-                </div>
-
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="company-info">
-                            <h3>The Ohio State University AI-EDGE Institute</h3>
-                            <p class="position">Generative AI Researcher</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> Columbus, Ohio</p>
-                        </div>
-                        <span class="experience-date">May 2024 - July 2024</span>
-                    </div>
-                    <ul class="achievements-list">
-                        <li>Engineered and fine-tuned Stable Diffusion 2 with a 300K-sample multimodal dataset, leading a 3-member team to build Pokémon-like image generation pipelines that improved model performance by 75%.</li>
-                        <li>Analyzed generative models (GPT-2, VAEs, GANs) to understand their theoretical frameworks and algorithmic implementation, using PyTorch for hands-on experimentation and testing.</li>
-                        <li>Optimized GPT-2's text generation on 1 million tokens of Shakespearean poems, implementing fine-tuning techniques in PyTorch, leading to 20% improvement.</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <h3>Ohio State AI-EDGE Institute</h3>
+          <p>Generative-AI Researcher | Columbus, OH</p>
         </div>
-    </section>
+        <span class="chip">May 2024 – Jul 2024</span>
+      </div>
+      <ul style="margin-top:15px;padding-left:20px">
+        <li>Fine-tuned Stable Diffusion 2 on 300K Pokémon images → 75% FID boost; deployed PyTorch pipeline.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">DUI Risk Radar</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Google Maps API</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <span class="project-award">🥈 2nd Place - Google Dev Fest</span>
-                        <ul class="achievements-list">
-                            <li>Designed the frontend web application using React in a team of 3 to address the UN's Goal 3.6 of reducing global road accident deaths and injuries.</li>
-                            <li>Integrated DUI data visualizations on interactive maps using Google Maps Platform API creating a responsive user interface.</li>
-                            <li>Added a speech-to-text feature for DUI incident reporting using Toastify, allowing users to submit reports verbally.</li>
-                        </ul>
-                    </div>
-                </div>
+<!-- ================= PROJECTS ================= -->
+<section id="proj">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="grid3">
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">SnapMarket</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">AI/ML</span>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <span class="project-award">🏆 TikTok Jam Participant</span>
-                        <ul class="achievements-list">
-                            <li>Engineered a React-Django application in a team of 6 to enhance TikTok's user experience by enabling direct product searches from video content.</li>
-                            <li>Developed backend functionality in Django to implement APIs for sending and retrieving image and JSON data.</li>
-                            <li>Synthesized Google Cloud Vision API and SERP API to analyze video screenshots, improving product search accuracy.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="card">
+        <h3>Nexbase @ NVIDIA</h3>
+        <p>Full-stack SRE dashboard (React + FastAPI + MySQL) – 100+ services, live SLO tracking, MCP-powered semantic search.</p>
+        <div class="tags"><span class="chip">React</span><span class="chip">FastAPI</span><span class="chip">MySQL</span><span class="chip">Docker</span></div>
+      </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Skills & Credentials</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">JavaScript</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Technologies & Frameworks</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Streamlit</span>
-                        <span class="skill-tag">MediaPipe</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-shield-alt"></i> Security Clearance</h3>
-                    <div class="skill-list">
-                        <span class="skill-tag" style="background: var(--accent-color); color: white;">Top Secret (In Progress)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="card">
+        <h3>Pokémon Generator</h3>
+        <p>Fine-tuned Stable Diffusion 2 for 128×128 Pokémon sprites; 75% FID improvement, Gradio web demo.</p>
+        <div class="tags"><span class="chip">PyTorch</span><span class="chip">Diffusers</span><span class="chip">Gradio</span></div>
+      </div>
 
-    <!-- Leadership Section -->
-    <section id="leadership" class="fade-in">
-        <div class="container">
-            <h2 class="section-title">Leadership & Extracurricular</h2>
-            <div class="leadership-grid">
-                <div class="leadership-card">
-                    <div class="leadership-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="leadership-title">Coding Interview Club</h3>
-                    <p><strong>Technical Officer</strong></p>
-                    <p>March 2025 - Present</p>
-                    <p style="margin-top: 15px;">Co-teaching technical interview coding problems weekly to help CS students pass interviews.</p>
-                </div>
-                <div class="leadership-card">
-                    <div class="leadership-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="leadership-title">Air Force ROTC</h3>
-                    <p><strong>Contracted Space Force Cadet</strong></p>
-                    <p>August 2023 - Present</p>
-                    <p style="margin-top: 15px;">Ranked in the top 3 of the class for exemplary leadership and dedication to the AFROTC.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="card">
+        <h3>Sudoku Solver AI</h3>
+        <p>CV + backtracking: phone-camera scan → solves 9×9 in 12ms; 98% digit-accuracy on 10k boards.</p>
+        <div class="tags"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">CNN</span></div>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://linkedin.com/in/herbertlawson" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/juniorlaw" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:hrlawson@miners.utep.edu"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy; 2025 Herbert Lawson. All rights reserved.</p>
-        </div>
-    </footer>
+      <div class="card">
+        <h3>FitFeed – Social Media for Workouts</h3>
+        <p>Post lifts, track PRs, follow friends. Streamlit front-end, SQLite backend, deployed on Streamlit Cloud.</p>
+        <div class="tags"><span class="chip">Streamlit</span><span class="chip">SQLite</span><span class="chip">Python</span><span class="chip">HTML/CSS</span></div>
+      </div>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    </div>
+  </div>
+</section>
 
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<!-- ================= SKILLS ================= -->
+<section id="skill">
+  <div class="container">
+    <h2 class="section-title">Skills & Credentials</h2>
+    <div class="grid3">
+      <div class="card">
+        <h4>Languages</h4>
+        <div class="tags"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">SQL</span><span class="chip">C/C++</span></div>
+      </div>
+      <div class="card">
+        <h4>Frameworks / Tools</h4>
+        <div class="tags"><span class="chip">React</span><span class="chip">FastAPI</span><span class="chip">Django</span><span class="chip">PyTorch</span><span class="chip">Docker</span><span class="chip">Redis</span></div>
+      </div>
+      <div class="card">
+        <h4>Clearance</h4>
+        <div class="tags"><span class="chip">Top Secret (in process)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+<!-- ================= LEADERSHIP ================= -->
+<section id="lead">
+  <div class="container">
+    <h2 class="section-title">Leadership</h2>
+    <div class="grid3">
+      <div class="card">
+        <h4>Air Force ROTC – Space Force Cadet</h4>
+        <p>Top 3 of class for leadership & academic performance; commissioning 2027.</p>
+      </div>
+      <div class="card">
+        <h4>Coding Interview Club – Tech Officer</h4>
+        <p>Coach 50+ students weekly on LeetCode patterns & system-design basics.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+<footer>
+  <div class="container">
+    <a href="https://linkedin.com/in/herbertlawson" target="_blank" style="color:var(--primary)">LinkedIn</a> •
+    <a href="https://github.com/juniorlaw" target="_blank" style="color:var(--primary)">GitHub</a>
+    <p style="margin-top:10px">© <span id="yr"></span> Herbert Lawson</p>
+  </div>
+</footer>
 
-        // Add active class to navigation based on scroll position
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.style.color = '';
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.style.color = 'var(--secondary-color)';
-                }
-            });
-        });
-
-        // Add dynamic typing effect to title (optional enhancement)
-        const title = document.querySelector('.title');
-        const titles = ['Software Engineer', 'AI Researcher', 'Space Force Cadet'];
-        let titleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeEffect() {
-            const currentTitle = titles[titleIndex];
-            
-            if (isDeleting) {
-                title.textContent = currentTitle.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                title.textContent = currentTitle.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentTitle.length) {
-                isDeleting = true;
-                setTimeout(typeEffect, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                titleIndex = (titleIndex + 1) % titles.length;
-                setTimeout(typeEffect, 500);
-            } else {
-                setTimeout(typeEffect, isDeleting ? 50 : 100);
-            }
-        }
-
-        // Start typing effect after page load
-        window.addEventListener('load', () => {
-            setTimeout(typeEffect, 1000);
-        });
-    </script>
+<script>
+// typing headline
+const roles=["Software Engineer","AI Researcher","Space-Force Cadet","Full-Stack Builder"];
+let i=0,j=0,forward=true,speed=110;
+function type(){
+  const t=document.getElementById('typeText');
+  t.textContent=roles[i].substring(0,j);
+  if(forward){ if(++j>roles[i].length){forward=false;setTimeout(type,1500);return;} }
+  else{ if(--j<0){forward=true;i=(i+1)%roles.length;} }
+  setTimeout(type,speed);
+}
+type();
+document.getElementById('yr').textContent=new Date().getFullYear();
+// smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'})
+}));
+</script>
 </body>
 </html>
